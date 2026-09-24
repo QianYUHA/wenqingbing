@@ -1,0 +1,7 @@
+import type { Archetype } from "@/data/archetypes";
+import { archetypes } from "@/data/archetypes";
+
+export function ResultHero({ primary, secondary }: { primary: Archetype; secondary?: Archetype }) {
+  const typeNumber = primary.id === "asymptomatic" ? "00" : String(archetypes.findIndex((archetype) => archetype.id === primary.id) + 1).padStart(2, "0");
+  return <section className="px-6 py-7 sm:px-10 lg:px-[7.8vw]"><header className="flex items-center gap-4"><span className="meta">WQB</span><div className="rule flex-1" /><span className="meta text-muted">Diagnosis complete</span><span className="meta text-muted">Issue 001</span></header><div className="pt-24 sm:pt-32 lg:ml-[9%]"><p className="serif text-2xl tracking-[-.04em] sm:text-4xl">你的文青病是——</p><h1 className="serif mt-10 max-w-5xl text-[clamp(4.5rem,10.5vw,11rem)] leading-[.88] tracking-[.04em]">{primary.nameCN.split("").join(" ")}</h1><p className="serif mt-8 text-xl tracking-[.12em] text-muted sm:ml-[20%] sm:text-3xl">{primary.nameEN}</p><p className="meta mt-12 text-accent">Primary type / {typeNumber}</p>{secondary && <div className="mt-20 border-l border-ink pl-5 sm:ml-[42%]"><p className="meta text-muted">Secondary tendency</p><p className="serif mt-4 text-3xl tracking-[-.05em]">{secondary.nameCN}</p><p className="serif mt-2 text-sm tracking-[.1em] text-muted">{secondary.nameEN}</p></div>}<p className="serif mt-24 whitespace-pre-line text-[clamp(1.8rem,3.4vw,3.8rem)] leading-[1.35] tracking-[-.05em]">{primary.tagline}</p></div></section>;
+}
